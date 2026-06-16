@@ -1,5 +1,5 @@
 using FactoryProblema.Modelos;
-
+using FactoryProblema.Excepciones;
 namespace FactoryProblema.Factory;
 public class VehiculoFactory
 {
@@ -15,11 +15,9 @@ public class VehiculoFactory
 
             case VehiculoTipo.Suv: 
             return new Suv();
-            
-             
+
             default:
-            throw new ArgumentOutOfRangeException(nameof(tipo),$"el tipo de vehiculo {tipo}, no esta en se sistema");
-            
+            throw new TipoVehiculoNoSoportadoException ($"el tipo de vehiculo {(int)tipo}, no esta registardo en el sistema");   
         }
     }
 }
