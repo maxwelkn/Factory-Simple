@@ -1,4 +1,4 @@
-﻿namespace FactoryProblema
+﻿namespace FactoryProblema.Modelos
 {
     internal class Compacto : Vehiculo {}
 }

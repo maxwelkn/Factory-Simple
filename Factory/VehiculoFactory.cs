@@ -1,8 +1,9 @@
-using FactoryProblema;
-namespace FactoryProblema;
+using FactoryProblema.Modelos;
+
+namespace FactoryProblema.Factory;
 public class VehiculoFactory
 {
-    public static Vehiculo Crear (VehiculoTipo tipo)
+    public static Vehiculo CrearVehiculo (VehiculoTipo tipo)
     {
         switch (tipo)
         {

@@ -1,57 +1,33 @@
-﻿using System;
+﻿using FactoryProblema.Factory;
+using FactoryProblema.Modelos;
 namespace FactoryProblema
-{
-    public enum VehiculoTipo
-        {
-            Sedan = 1,
-            Compacto = 2,
-            Suv = 3
-        }
-    public class Program
-    {
-        
+{    
+    internal class Program
+    {    
         static void Main(string[] args)
         {
             Console.Clear();
             Console.WriteLine("[1]Sedan [2]Compacto [3]Suv");
             Console.Write("Elija cual tipo de vehiculo desea: ");
             int opcionNumero = int.Parse(Console.ReadLine()!);
-
+        
             VehiculoTipo opcionElegida = (VehiculoTipo) opcionNumero;
 
-            if (opcionElegida == VehiculoTipo.Sedan)
-            {
-                Sedan sedan = new Sedan();
-                Console.Write("Diga la marca: ");
-                sedan.Marca = Console.ReadLine()!;
-                Console.Write("Diga el precio: ");
-                sedan.Precio = decimal.Parse(Console.ReadLine()!);
+            Vehiculo v = VehiculoFactory.CrearVehiculo(opcionElegida);
+            System.Console.WriteLine("\nIngrese los datos del vehiculo:");
+            System.Console.WriteLine("\nMarca:");
+            v.Marca = Console.ReadLine()!;
+            
+            System.Console.WriteLine("\nPrecio:");
+            v.Precio = decimal.Parse(Console.ReadLine()!);
 
-                Console.WriteLine(sedan);
-            }
-            else if (opcionElegida == VehiculoTipo.Compacto)
-            {
-                Compacto compacto = new Compacto();
-                Console.Write("Diga la marca: ");
-                compacto.Marca = Console.ReadLine()!;
-                Console.Write("Diga el precio: ");
-                compacto.Precio = decimal.Parse(Console.ReadLine()!);
+            System.Console.WriteLine("\nResultado:");
+            System.Console.WriteLine(v.ToString());
 
-                Console.WriteLine(compacto);
-            }
-            else if (opcionElegida == VehiculoTipo.Suv)
-            {
-                Suv suv = new Suv();
-                Console.Write("Diga la marca: ");
-                suv.Marca = Console.ReadLine()!;
-                Console.Write("Diga el precio: ");
-                suv.Precio = decimal.Parse(Console.ReadLine()!);
-
-                Console.WriteLine(suv);
-            }
+            System.Console.WriteLine("\nPresione cualquier letra para continuar..");
             Console.ReadKey();
-            Main(args);
 
+            Main(args);
         }
     }
 }
