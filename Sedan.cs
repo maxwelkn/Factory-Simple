@@ -1,6 +1,6 @@
 ﻿namespace FactoryProblema
 {
-    public class Sedan
+    public class Sedan : Vehiculo
     {
              
     }

@@ -4,15 +4,22 @@ namespace FactoryProblema
 {
     internal class Program
     {
+        public enum VehiculoTipo
+        {
+            Sedan = 1,
+            Compacto = 2,
+            Suv = 3
+        }
         static void Main(string[] args)
         {
             Console.Clear();
             Console.WriteLine("[1]Sedan [2]Compacto [3]Suv");
             Console.Write("Elija cual tipo de vehiculo desea: ");
-            int opcion = int.Parse(Console.ReadLine()!);
+            int opcionNumero = int.Parse(Console.ReadLine()!);
 
+            VehiculoTipo opcionElegida = (VehiculoTipo) opcionNumero;
 
-            if (opcion == 1)
+            if (opcionElegida == VehiculoTipo.Sedan)
             {
                 Sedan sedan = new Sedan();
                 Console.Write("Diga la marca: ");
@@ -22,7 +29,7 @@ namespace FactoryProblema
 
                 Console.WriteLine(sedan);
             }
-            else if (opcion == 2)
+            else if (opcionElegida == VehiculoTipo.Compacto)
             {
                 Compacto compacto = new Compacto();
                 Console.Write("Diga la marca: ");
