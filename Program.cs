@@ -1,15 +1,15 @@
 ﻿using System;
-
 namespace FactoryProblema
 {
-    internal class Program
-    {
-        public enum VehiculoTipo
+    public enum VehiculoTipo
         {
             Sedan = 1,
             Compacto = 2,
             Suv = 3
         }
+    public class Program
+    {
+        
         static void Main(string[] args)
         {
             Console.Clear();
@@ -39,7 +39,7 @@ namespace FactoryProblema
 
                 Console.WriteLine(compacto);
             }
-            else
+            else if (opcionElegida == VehiculoTipo.Suv)
             {
                 Suv suv = new Suv();
                 Console.Write("Diga la marca: ");
