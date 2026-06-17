@@ -11,36 +11,78 @@ namespace FactoryProblema
             Console.Clear();
             Console.WriteLine("[1]Sedan [2]Compacto [3]Suv [4] Salir");
             Console.Write("Elija cual tipo de vehiculo desea: ");
-            int opcionNumero = int.Parse(Console.ReadLine()!);
-        
-            VehiculoTipo opcionElegida = (VehiculoTipo) opcionNumero;
+            string opcionNumero = Console.ReadLine()!;
 
-            Vehiculo v = VehiculoFactory.CrearVehiculo(opcionElegida);
-            System.Console.WriteLine("\nIngrese los datos del vehiculo:");
-            System.Console.Write("\nMarca:");
-            v.Marca = Console.ReadLine()!;
+            if (int.TryParse(opcionNumero, out int entrada))
+            {
+
+                VehiculoTipo opcionElegida = (VehiculoTipo) entrada;
+
+                Vehiculo v = VehiculoFactory.CrearVehiculo(opcionElegida);
+                System.Console.WriteLine("\nIngrese los datos del vehiculo:");
+
+                while (true)
+                    {
+                        System.Console.Write("\nMarca:");
+                        string marcaIngresada = Console.ReadLine()!;
+
+                        if (string.IsNullOrWhiteSpace(marcaIngresada))
+                        {
+                            System.Console.WriteLine("[Error] la marca ingresada no puede estar vacia, escriba la marca.");
+                            continue;
+                        }
+                        v.Marca = marcaIngresada;
+                        break;
+                    }
+                
+                v.Marca = Console.ReadLine()!;
+
+                decimal precioValido;
+                
+                while (true)
+                    {
+                        System.Console.Write("\nPrecio: ");
+                        string precioIngresado = Console.ReadLine()!;   
+
+                        if (!decimal.TryParse(precioIngresado, out decimal precioConvertido))
+                        {
+                            System.Console.WriteLine("[Error] el precio que debes ingresar debe ser un numero, decimal o entero");
+                            continue;
+                        }
+                        if (precioConvertido < 0)
+                        {
+                            System.Console.WriteLine("[Error] El precio no puede ser negativo");
+                            continue;
+                        }
+                        precioValido = precioConvertido;
+                        break;
+                    }
+                    v.Precio = precioValido;
+
+                System.Console.WriteLine("\nResultado:");
+                System.Console.WriteLine(v.ToString());
+
+                if (entrada == 4)
+                {
+                System.Console.WriteLine("Estas seguro que quieres salir? s/n");
+                string respuesta = Console.ReadLine()!.Trim().ToLower();
+
+                if (respuesta == "s")
+                {
+                    System.Console.WriteLine("Gracias por usar el programa, vuelva pronto!");
+                    break;
+                }
+                System.Console.WriteLine("Programa en ejecucion, presione cualquier letra para continuar...");
+                Console.ReadKey();
+                continue;
+                }
+            } 
+            else
+            {
+                System.Console.WriteLine("Opcion invalida, no ingresaste ningun numero ");
+                continue;
+            }
             
-            System.Console.Write("\nPrecio:");
-            v.Precio = decimal.Parse(Console.ReadLine()!);
-
-            System.Console.WriteLine("\nResultado:");
-            System.Console.WriteLine(v.ToString());
-
-            if (opcionNumero == 4)
-            {
-            System.Console.WriteLine("Estas seguro que quieres salir?");
-            string respuesta = Console.ReadLine()!;
-
-            if (respuesta == "s")
-            {
-                System.Console.WriteLine("Gracias por usar el programa, vuelva pronto!");
-            }
-            System.Console.WriteLine("Programa en ejecucion, presione cualquier letra para continuar...");
-            Console.ReadKey();
-            }
-
-            System.Console.WriteLine("\nPresione cualquier letra para continuar...");
-            Console.ReadKey();
             }
         }
     }
