@@ -34,6 +34,7 @@ namespace FactoryProblema
             else
             {
                 System.Console.WriteLine("Opcion invalida, no ingresaste ningun numero ");
+                Console.ReadKey();
                 continue;
             }
 
