@@ -5,6 +5,6 @@ public abstract class Vehiculo // cree una clase y no una interfaz ya que siento
     public decimal Precio { get; set; }
     public override string ToString()
         {
-            return $"Marca: {Marca}. Precio: {Precio}";
+            return $"{GetType().Name} - Marca: {Marca}. Precio: {Precio:C}";
         }
 }
