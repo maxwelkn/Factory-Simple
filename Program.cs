@@ -1,4 +1,5 @@
-﻿using FactoryProblema.Factory;
+﻿using FactoryProblema.Excepciones;
+using FactoryProblema.Factory;
 using FactoryProblema.Modelos;
 namespace FactoryProblema
 {    
@@ -14,16 +15,49 @@ namespace FactoryProblema
             string opcionNumero = Console.ReadLine()!;
 
             if (int.TryParse(opcionNumero, out int entrada))
+            {   
+                if (entrada == 4)
+                {
+                System.Console.WriteLine("Estas seguro que quieres salir? s/n");
+                string respuesta = Console.ReadLine()!.Trim().ToLower();
+
+                if (respuesta == "s")
+                {
+                    System.Console.WriteLine("Gracias por usar el programa, vuelva pronto!");
+                    break;
+                }
+                System.Console.WriteLine("Programa en ejecucion, presione cualquier letra para continuar...");
+                Console.ReadKey();
+                continue;
+                }
+            } 
+            else
             {
+                System.Console.WriteLine("Opcion invalida, no ingresaste ningun numero ");
+                continue;
+            }
 
                 VehiculoTipo opcionElegida = (VehiculoTipo) entrada;
 
-                Vehiculo v = VehiculoFactory.CrearVehiculo(opcionElegida);
+                Vehiculo v;
+                
+                try
+                {
+                  v = VehiculoFactory.CrearVehiculo(opcionElegida);  
+                }
+                catch (TipoVehiculoNoSoportadoException ex)
+                {
+                    System.Console.WriteLine($"\n [Error de fabrica]: {ex.Message}");
+                    System.Console.WriteLine("Programa en ejecucion, presione cualquier letra para continuar...");
+                    Console.ReadKey();
+                    continue;   
+                }
+                
                 System.Console.WriteLine("\nIngrese los datos del vehiculo:");
 
                 while (true)
                     {
-                        System.Console.Write("\nMarca:");
+                        System.Console.Write("\nMarca: ");
                         string marcaIngresada = Console.ReadLine()!;
 
                         if (string.IsNullOrWhiteSpace(marcaIngresada))
@@ -34,9 +68,6 @@ namespace FactoryProblema
                         v.Marca = marcaIngresada;
                         break;
                     }
-                
-                v.Marca = Console.ReadLine()!;
-
                 decimal precioValido;
                 
                 while (true)
@@ -61,28 +92,7 @@ namespace FactoryProblema
 
                 System.Console.WriteLine("\nResultado:");
                 System.Console.WriteLine(v.ToString());
-
-                if (entrada == 4)
-                {
-                System.Console.WriteLine("Estas seguro que quieres salir? s/n");
-                string respuesta = Console.ReadLine()!.Trim().ToLower();
-
-                if (respuesta == "s")
-                {
-                    System.Console.WriteLine("Gracias por usar el programa, vuelva pronto!");
-                    break;
-                }
-                System.Console.WriteLine("Programa en ejecucion, presione cualquier letra para continuar...");
                 Console.ReadKey();
-                continue;
-                }
-            } 
-            else
-            {
-                System.Console.WriteLine("Opcion invalida, no ingresaste ningun numero ");
-                continue;
-            }
-            
             }
         }
     }
